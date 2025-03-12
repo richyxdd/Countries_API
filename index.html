@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Info API</title>
+</head>
+<body>
+    <h1>Country Information</h1>
+    <label for="country">Enter Country Name:</label>
+    <input type="text" id="country" name="country">
+    <button id="getInfo">Get Info</button>
+    
+    <div id="results"></div>
+
+    <script>
+        document.getElementById("getInfo").addEventListener("click", function() {
+            const countryName = document.getElementById("country").value;
+            const url = `https://restcountries.com/v3.1/name/${countryName}?fullText=true`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        const country = data[0];
+                        const countryInfo = `
+                            <h2>${country.name.common}</h2>
+                            <p><strong>Capital:</strong> ${country.capital ? country.capital[0] : 'N/A'}</p>
+                            <p><strong>Region:</strong> ${country.region}</p>
+                            <p><strong>Population:</strong> ${country.population}</p>
+                            <p><strong>Languages:</strong> ${Object.values(country.languages).join(', ')}</p>
+                        `;
+                        document.getElementById("results").innerHTML = countryInfo;
+                    } else {
+                        document.getElementById("results").innerHTML = "<p>No information found for this country.</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById("results").innerHTML = "<p>Error fetching data. Please try again later.</p>";
+                });
+        });
+    </script>
+</body>
+</html>
