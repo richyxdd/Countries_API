@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,10 +25,10 @@
                         const country = data[0];
                         const countryInfo = `
                             <h2>${country.name.common}</h2>
-                            <p><strong>Capital:</strong> ${country.capital ? country.capital[0] : 'N/A'}</p>
-                            <p><strong>Region:</strong> ${country.region}</p>
-                            <p><strong>Population:</strong> ${country.population}</p>
-                            <p><strong>Languages:</strong> ${Object.values(country.languages).join(', ')}</p>
+                            <p><Capital: ${country.capital ? country.capital[0] : 'N/A'}</p>
+                            <p>Region: ${country.region}</p>
+                            <p>Population: ${country.population}</p>
+                            <p>Languages:${Object.values(country.languages).join(', ')}</p>
                         `;
                         document.getElementById("results").innerHTML = countryInfo;
                     } else {
